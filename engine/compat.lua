@@ -8,12 +8,13 @@ function Compat:setTargetVersion(version)
 end
 
 function Compat:checkVersion()
-    local runner_version = love.getVersion()
+    local major, minor, revision, codename = love.getVersion()
+    local runner_version_string = major .. "." .. minor .. "." .. revision .. " (" .. codename .. ")"
 
-    print("running on love2d " .. runner_version .. "")
+    print("running on love2d " .. runner_version_string)
 
     if self.targetVersion and not love.isVersionCompatible(self.targetVersion) then
-        print("love2d " .. runner_version .. " is incompatible with target version " .. self.targetVersion .. ". you may encounter bugs or crashes!")
+        print("love2d " .. runner_version_string .. " is incompatible with target version " .. self.targetVersion .. ". you may encounter bugs or crashes!")
     end
 
 end
