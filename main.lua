@@ -3,6 +3,8 @@
 
 require("engine/compat")
 require("engine/window")
+require("engine/assets")
+
 require("game/game")
 
 function love.load()
@@ -10,10 +12,15 @@ function love.load()
     Compat:setTargetVersion("11.5")
 
     -- create initial window
-    Window:setInternalResolution(128, 128)
-    if not Window:init(640, 480, false) then
+    Window:setInternalResolution(128, 128, false)
+    Window.marginColour = {0.1, 0.1, 0.4}
+    if not Window:updateMode(640, 480, false) then
         print("failed to create window!")
     end
+
+    -- load assets
+    love.graphics.setDefaultFilter("linear", "nearest")
+    AssetManager:init()
 
     -- game init
     Game:init()
@@ -34,7 +41,12 @@ function love.draw()
     love.graphics.setCanvas(Window.internalCanvas)
     love.graphics.clear(0.2, 0.1, 0.3)
 
-    Game:draw(Window.internalCanvas)
+    Game:draw()
+
+    -- draw internal screen to window
+    love.graphics.setCanvas()
+    love.graphics.clear(Window.marginColour)
 
     Window:draw()
+
 end
