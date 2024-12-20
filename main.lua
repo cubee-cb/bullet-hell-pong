@@ -1,15 +1,19 @@
 -- love2d engine
 -- cubee
 
+require("engine/compat")
+require("engine/window")
+require("game/game")
+
 function love.load()
     -- default target: love2d 11
     Compat:setTargetVersion("11.5")
 
-    Window:setInternalResolution(180, 128)
-    if not Window:init(800, 480) then
-        print("failed to create window. uhh. that's probably not good")
+    -- create initial window
+    Window:setInternalResolution(128, 128)
+    if not Window:init(640, 480, false) then
+        print("failed to create window!")
     end
-
 
     -- game init
     Game:init()

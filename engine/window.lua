@@ -9,14 +9,11 @@ Window = {}
 ---@param fullscreen any
 function Window:init(window_width, window_height, fullscreen)
 
-    -- use display size if in fullscreen
-    if fullscreen then
-        window_width, window_height = love.graphics.getDimensions()
-    end
-
     self:updateScale(window_width, window_height, false)
 
-    return love.window.setMode(window_width, window_height, {fullscreen = fullscreen, fullscreentype = "desktop"})
+    return fullscreen
+        and love.window.setMode(0, 0, {fullscreen = true, fullscreentype = "desktop"})
+        or love.window.setMode(window_width, window_height, {fullscreen = false})
 end
 
 --- set the internal resolution of the game display
@@ -44,7 +41,7 @@ end
 ---@param window_height any
 ---@param resize any whether to resize the internal screen to cover the whole window. false to letterbox.
 function Window:updateScale(window_width, window_height, resize)
-    self.scale = math.min(window_width / self.base_internal_width, window_height / self.base_internal_width)
+    self.scale = math.floor(math.min(window_width / self.base_internal_width, window_height / self.base_internal_height))
 
     if resize then
         -- internal pixels to add, so the internal display covers the full screen instead of potentially missing the edges
