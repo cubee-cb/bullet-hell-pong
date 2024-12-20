@@ -12,7 +12,7 @@ AssetManager = {
 
 function AssetManager:init()
     -- create missing texture
-    local missingPath = "engine/resources/_missing.png"
+    local missingPath = "engine/resources/missing.png"
     if love.filesystem.getInfo(missingPath) then
         self.missingTexture = love.graphics.newImage(missingPath)
     else

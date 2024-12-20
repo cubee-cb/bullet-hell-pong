@@ -4,11 +4,12 @@
 require("engine/window")
 require("engine/spriteObject")
 
---require("game/resources/objects/ball")
+require("game/resources/objects/ball")
 
 Game = {}
 
 local object
+local ball
 
 function Game:init()
     Compat:setTargetVersion("11.5")
@@ -32,11 +33,22 @@ function Game:init()
         spriteKey = "ball"
     })
 
+
+    ball = Ball:new({
+        position = {
+            x = 16,
+            y = 16
+        },
+        spriteKey = "ball"
+    })
 end
 
 
 function Game:update(dt)
 
+    ball:update()
+
+    --[[
     object:move(2, 1)
 
     if object.position.x > Window.internal_width then
@@ -45,12 +57,14 @@ function Game:update(dt)
     if object.position.y > Window.internal_height then
         object:move(0, -Window.internal_height)
     end
-
+--]]
 end
 
 
 function Game:draw(canvas)
-    object:draw()
+    --object:draw()
+
+    ball:draw()
 
     Drawing:drawSprite(AssetManager:getSprite("ball"), {x = 0, y = 16})
     Drawing:drawSprite(AssetManager:getSprite("ball"), {x = 1, y = 32}) -- because of the overscan, we should draw with a 1px offset from the edges

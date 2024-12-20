@@ -9,6 +9,10 @@ function Object:new(o)
         position = {
             x = 0,
             y = 0
+        },
+        velocity = {
+            x = 0,
+            y = 0
         }
     }
     setmetatable(o, self)
@@ -23,6 +27,6 @@ function Object:move(dx, dy)
 end
 
 function Object:update()
-    
+
 end
 
