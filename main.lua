@@ -30,9 +30,9 @@ function love.load()
 end
 
 
-function love.update()
+function love.update(dt)
 
-    Game:update()
+    Game:update(dt)
 end
 
 

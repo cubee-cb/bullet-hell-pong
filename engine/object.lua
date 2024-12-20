@@ -22,4 +22,7 @@ function Object:move(dx, dy)
     self.position.y = self.position.y + dy
 end
 
+function Object:update()
+    
+end
 

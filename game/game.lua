@@ -35,7 +35,7 @@ function Game:init()
 end
 
 
-function Game:update()
+function Game:update(dt)
 
     object:move(2, 1)
 
