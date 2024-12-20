@@ -12,14 +12,13 @@ AssetManager = {
 
 function AssetManager:init()
     -- create missing texture
-    self.missingTexture = love.graphics.newCanvas(16, 16)
-    love.graphics.setCanvas(self.missingTexture)
-    love.graphics.clear(0, 0, 0)
-
-    love.graphics.setColor(1, 0, 0.8)
-    love.graphics.rectangle("fill", 0, 0, 8, 8)
-    love.graphics.rectangle("fill", 8, 8, 8, 8)
-
+    local missingPath = "engine/resources/_missing.png"
+    if love.filesystem.getInfo(missingPath) then
+        self.missingTexture = love.graphics.newImage(missingPath)
+    else
+        print("something happened to the missing texture. it's gone missing! oh, how could the missing texture possibly go missing? this is another level of silly! anyway broken things might be invisible now so be warned.")
+        self.missingTexture = love.graphics.newCanvas(16, 16)
+    end
 
     -- reset canvas
     love.graphics.setColor(1, 1, 1)
