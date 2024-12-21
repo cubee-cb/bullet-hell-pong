@@ -32,6 +32,8 @@ function Game:init()
 
     -- load assets
     AssetManager:loadSprite("ball", "ball.png")
+    AssetManager:loadSprite("paddle-left", "paddle-left.png")
+    AssetManager:loadSprite("paddle-right", "paddle-right.png")
     AssetManager:loadSprite("see-the-error", "no-exist.png")
 
 
