@@ -3,9 +3,9 @@
 
 require("engine/spriteObject")
 
-Ball = SpriteObject:new()
+Bullet = SpriteObject:new()
 
-function Ball:new(position, velocity, spriteKey)
+function Bullet:new(position, velocity, spriteKey)
     local o = {
         spriteKey = spriteKey,
         position = position,
@@ -18,27 +18,23 @@ function Ball:new(position, velocity, spriteKey)
     return o
 end
 
-function Ball:update()
+function Bullet:update()
 
     self:move(self.velocity.x, self.velocity.y)
 
 
     -- simple collisions
     if self.position.y >= 180-32 then
-        self.position.y = 180-32
-        self.velocity.y = math.abs(self.velocity.y) * -1.05
+        self:destroy()
     end
     if self.position.x >= 320-32 then
-        self.position.x = 320-32
-        self.velocity.x = math.abs(self.velocity.x) * -1.05
+        self:destroy()
     end
     if self.position.y <= 16 then
-        self.position.y = 16
-        self.velocity.y = math.abs(self.velocity.y) * 1.05
+        self:destroy()
     end
     if self.position.x <= 16 then
-        self.position.x = 16
-        self.velocity.x = math.abs(self.velocity.x) * 1.05
+        self:destroy()
     end
 
 end

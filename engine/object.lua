@@ -4,16 +4,10 @@
 Object = {}
 
 
-function Object:new(o)
-    o = o or {
-        position = {
-            x = 0,
-            y = 0
-        },
-        velocity = {
-            x = 0,
-            y = 0
-        }
+function Object:new(position)
+    local o = {
+        position = position,
+        velocity = {x = 0, y = 0}
     }
     setmetatable(o, self)
     self.__index = self

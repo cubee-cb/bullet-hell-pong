@@ -8,9 +8,10 @@ require("engine/assets")
 
 SpriteObject = Object:new()
 
-function SpriteObject:new(o)
-    o = o or {
-        spriteKey = "none"
+function SpriteObject:new(position, spriteKey)
+    local o = {
+        position = position,
+        spriteKey = spriteKey
     }
 
     setmetatable(o, self)

@@ -1,15 +1,20 @@
--- ball object
+-- paddle object
 -- cubee
 
+require("engine/input")
 require("engine/spriteObject")
 
-Ball = SpriteObject:new()
+Paddle = SpriteObject:new()
 
-function Ball:new(position, velocity, spriteKey)
+function Paddle:new(position, spriteKey, input)
     local o = {
         spriteKey = spriteKey,
+        input = input,
         position = position,
-        velocity = velocity,
+        velocity = {
+            x = 0,
+            y = 0
+        },
     }
 
     setmetatable(o, self)
@@ -18,7 +23,16 @@ function Ball:new(position, velocity, spriteKey)
     return o
 end
 
-function Ball:update()
+function Paddle:update()
+    self.velocity.x = 0
+    self.velocity.y = 0
+
+    if self.input:action(Action.UP) then
+        self.velocity.y = -1
+    end
+    if self.input:action(Action.DOWN) then
+        self.velocity.y = 1
+    end
 
     self:move(self.velocity.x, self.velocity.y)
 
