@@ -8,21 +8,20 @@ Device = {
     GAMEPAD = {},
 }
 
---TODO: proper keybindings inplementation
---TODO: gamepad bindings
+--TODO: proper bindings inplementation
 Action = {
-    UP = {"up"},
-    DOWN = {"down"},
-    LEFT = {"left"},
-    RIGHT = {"right"},
-    FIRE = {"z"},
-    DASH = {"x"},
-    CONFIRM = {"z"},
-    BACK = {"x"},
-    PAUSE = {"enter"},
-    RESET = {"backspace"},
-    SCROLL_LEFT = {"["},
-    SCROLL_RIGHT = {"]"},
+    UP = {{"up"}, { "dpup"}},
+    DOWN = {{"down"}, {"dpdown"}},
+    LEFT = {{"left"}, {"dpleft"}},
+    RIGHT = {{"right"}, {"dpright"}},
+    FIRE = {{"z"}, {"a"}},
+    DASH = {{"x"}, {"b"}},
+    CONFIRM = {{"z"}, {"a"}},
+    BACK = {{"x"}, {"b"}},
+    PAUSE = {{"enter"}, {"start"}},
+    RESET = {{"backspace"}, {"x"}},
+    SCROLL_LEFT = {{"["}, {"leftshoulder"}},
+    SCROLL_RIGHT = {{"]"}, {"rightshoulder"}},
 }
 
 --- create an input handler
@@ -53,7 +52,7 @@ end
 function Input:action(action)
 
     if self.device == Device.KEYBOARD then
-        for i, key in ipairs(action) do
+        for i, key in ipairs(action[1]) do
             if love.keyboard.isDown(key) then -- won't use keys directly here cause otherwise the extension complains
                 return true
             end
@@ -61,6 +60,14 @@ function Input:action(action)
 
     elseif self.device == Device.GAMEPAD then
         --TODO: gamepad support
+        local joystick = love.joystick.getJoysticks()[self.device_id]
+        if not (joystick and joystick:isGamepad()) then return false end
+
+        for i, button in ipairs(action[2]) do
+            if joystick:isGamepadDown(button) then -- won't use keys directly here cause otherwise the extension complains
+                return true
+            end
+        end
         
     end
 

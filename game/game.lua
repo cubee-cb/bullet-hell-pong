@@ -48,7 +48,7 @@ function Game:init()
         spriteKey = "ball"
     })
 
-    balls[1] = Ball:new({x = 50, y = 50}, {x = 16, y = 16}, "ball")
+    balls[1] = Ball:new({x = 50, y = 50}, {x = 0.5, y = 0.5}, "ball")
 
 
     paddles[1] = Paddle:new({x = 32, y = 100}, "paddle-left", inputs[1])
